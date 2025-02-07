@@ -1,4 +1,4 @@
-﻿# Apply migrations only if necessary
+# Apply migrations only if necessary
 echo "Checking for pending migrations..."
 python3 manage.py makemigrations
 python3 manage.py migrate

@@ -46,6 +46,29 @@ The API uses JWT for authentication. Users must first obtain a token to access p
 - Obtain access token: `POST /user/register/`
 - Refresh token: `POST /user/refresh/`
 
+## User Flow
+After authentication, the user is presented with the necessary operations to design their workout plan.
+
+* GET /api/exercises - retrieves all the available exercises for a workout plan.
+* POST /api/workouts - creates a workout with desired exercises. Specifying reps, sets or the duration of an exercise.
+
+After creating several workouts, the user can now create their weekly workout plan. 
+
+* POST /api/weekly_workouts/ - creates a weekly workout plan. Specifying desired workouts and their frequencies per week.
+* POST /api/weekly_workout/set_user_workout_goal/ - User specifies their weekly calories burned goal.
+
+After creating a workout plan, the user can now start and track their progreess.
+
+* POST /api/workouts/{id}/start_workout/ - Marks the start of user's workout session. Response containing workout details and current exercise.
+* POST /api/workouts/{id}/complete_exercise/ - Marks the completion of workout's current exercise. Response containing next exercise repetitevly, until the workout is finished.
+
+After completing the workout, user can track their updated goal and workout history.
+
+* GET /api/workouts/workout_history - Retrieves the workout history with user's initial calories (pre-workout), calories burned during the workout and its completion time.
+* GET /api/weekly_workout/{id}/ - Retrieves the workout plan with user's weeks remaining to goal completion.
+
+Updating user's goal will update any weekly exercise's remainder of goal completion weeks.
+
 ## Error Handling
 The API returns appropriate status codes and messages for errors.
 | Status Code | Meaning |
